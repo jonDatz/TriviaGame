@@ -1,0 +1,9 @@
+body {
+    background-image: url('../images/bg.jpg');
+    background-size: 100%;
+}
+
+.jumbotron {
+    opacity: 0.99;
+    text-align: center;
+}
