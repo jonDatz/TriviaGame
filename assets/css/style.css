@@ -3,7 +3,55 @@ body {
     background-size: 100%;
 }
 
+.container {
+    margin-top: 20px;
+}
+
 .jumbotron {
     opacity: 0.99;
     text-align: center;
+    padding: 2rem 2rem;
+}
+
+#timerBG {
+    width: 80%;
+    overflow: hidden;
+    position: relative;
+}
+
+#timer {
+    position: absolute;
+    z-index: 100;
+    font-family: 'Amatic SC', cursive;
+    font-size: 70px;
+    margin: 36px 0px 0px 84px;
+}
+.questions {
+    text-align: left;
+}
+
+#startgameBTN {
+    text-align: center;
+    border-radius: .1rem;
+    background-color: #CC0000;
+    border-color: rgb(133, 0, 0);
+    border: 2px solid transparent;
+}
+
+#startgameBTN:hover {
+    background-color: rgb(133, 0, 0);
+}
+
+#answers {
+    font-size: 24px;
+    padding: 10px 10px 10px 30px;
+}
+
+.chosenAnswer {
+    padding: 5px 5px 5px 10px;
+
+}
+.chosenAnswer:hover {
+    background-color: #75ABDC;
+
 }
