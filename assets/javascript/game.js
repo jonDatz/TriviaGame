@@ -59,6 +59,7 @@ $(document).ready(function () {
   function reset() {
 
     console.log('reset works');
+    clearInterval(counter);
     count = 31;
     userAnswer = 0;
 
@@ -235,19 +236,52 @@ $(document).ready(function () {
 
 
 }
-function showGif() {
 
+// *** Here we show the gif in between *** //
+
+function showGif() {
+  
+  // set the count to only 4 seconds
+  let gifCount = 4;
+
+  // create the interval 
+  function gifTimer() {
+    gifCount = 4;
+
+
+    //sets timer to go down
+    gifCounter = setInterval(showGifTimer, 1000);
+  }
+
+  // show the timer to the screen and subtract
+  function showGifTimer() {
+    gifCount--;
+    $('#timer').text(":" + gifCount);
+
+
+    if (gifCount < 1) {
+      console.log('out of time if statement worked!');
+      clearInterval(gifCounter);
+      reset();
+      // run some type of reset //
+
+
+    }
+  }
 
 
   if (userAnswer === selectedSet.answer) {
+    gifTimer();
     console.log('show correct Gif');
     
   } else if(userAnswer != selectedSet.answer && userAnswer != 0) {
+    gifTimer();
     console.log('show incorrect Gif');
     
   } else {
+    gifTimer();
     console.log('show unanswered Gif');
-    
+
   }
 }
 
