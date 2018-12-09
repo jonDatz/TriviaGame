@@ -273,14 +273,23 @@ function showGif() {
   if (userAnswer === selectedSet.answer) {
     gifTimer();
     console.log('show correct Gif');
+    $('#question').empty();
+    $('.chosenAnswer').remove();
+    $('#answers').append("<p>");
+
     
   } else if(userAnswer != selectedSet.answer && userAnswer != 0) {
     gifTimer();
     console.log('show incorrect Gif');
+    $('#question').empty();
+    $('.chosenAnswer').remove();
     
   } else {
     gifTimer();
     console.log('show unanswered Gif');
+    $('#question').empty();
+    $('.chosenAnswer').remove();
+
 
   }
 }
