@@ -278,6 +278,7 @@ function showGif() {
     $('#answers').append('<img class="gifImage" src="assets/images/correct.gif">');
     numberRight;
     console.log(numberRight);
+    scoreboard();
 
     
   } else if(userAnswer != selectedSet.answer && userAnswer != 0) {
@@ -288,6 +289,8 @@ function showGif() {
     $('#answers').append('<img class="gifImage" src="assets/images/incorrect.gif">');
     numberWrong;
     console.log(numberWrong);
+    scoreboard();
+
     
   } else {
     gifTimer();
@@ -297,9 +300,27 @@ function showGif() {
     $('#answers').append('<img class="gifImage" src="assets/images/unanswered.gif">');
     unanswered;
     console.log(unanswered);
+    scoreboard();
+  }
 
+
+function scoreboard() {
+  if (unanswered + numberRight + numberWrong === (questions.length + 1)){
+      console.log('show score screen');
   }
 }
+
+
+
+
+
+}
+
+
+
+
+
+
 
 
   hideReset();
