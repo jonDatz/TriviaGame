@@ -65,7 +65,7 @@ $(document).ready(function () {
 
     $('#question').empty();
     $('.chosenAnswer').remove();
-    $('#gifs').empty();
+    $('.gifImage').remove();
 
 
     showQuestion();
@@ -275,7 +275,9 @@ function showGif() {
     console.log('show correct Gif');
     $('#question').empty();
     $('.chosenAnswer').remove();
-    $('#answers').append("<p>");
+    $('#answers').append('<img class="gifImage" src="assets/images/correct.gif">');
+    numberRight;
+    console.log(numberRight);
 
     
   } else if(userAnswer != selectedSet.answer && userAnswer != 0) {
@@ -283,13 +285,18 @@ function showGif() {
     console.log('show incorrect Gif');
     $('#question').empty();
     $('.chosenAnswer').remove();
+    $('#answers').append('<img class="gifImage" src="assets/images/incorrect.gif">');
+    numberWrong;
+    console.log(numberWrong);
     
   } else {
     gifTimer();
     console.log('show unanswered Gif');
     $('#question').empty();
     $('.chosenAnswer').remove();
-
+    $('#answers').append('<img class="gifImage" src="assets/images/unanswered.gif">');
+    unanswered;
+    console.log(unanswered);
 
   }
 }
