@@ -39,76 +39,220 @@ $(document).ready(function () {
   ];
 
 
-  console.log(questions[0]);
-
-  let count = 30;
-  let counter = setInterval(timer, 1000); // runs every 1 second(1000);
-  let unanswered = 0;
-  let numberRight = 0;
-  let numberWrong = 0;
-  let userAnswer = [];
-  let numberOfAnswers = questions.length;
 
 
-  console.log(count);
-  console.log(counter);
-  console.log(unanswered);
-  console.log(numberRight);
-  console.log(numberWrong);
+  let count = 31; // Countdown max value                                                         //
+  let running = false; // Control game state                                                          //
+  let unanswered = 0; // number of questions unanswered                                              //
+  let numberRight = 0; // number of questions answered correctly                                      //
+  let numberWrong = 0; // number of questions answered incorrectly                                    //
+  let userAnswer = 0; // grabs value of user click to compare correct answer value                   //
+  let numberOfAnswers = questions.length; // Sets game limit per amount of questions                   //
+  let questionNumber = 0; // This will allow us to run through order of questions by calling to array  //
+  let questionUsed = [];
+
   console.log(userAnswer);
-  console.log(numberOfAnswers);
 
 
-  // *** TIMER FUNCTION ** //
+  // *** RESET PAGE FUNCTION *** //
 
-  function timer() {
-    count = count - 1;
+  function reset() {
 
-    if (count <= 0) {
-      clearInterval(counter);
+    console.log('reset works');
+    count = 31;
+    userAnswer = 0;
 
-      // outOfTime();  Show correct answer for a few seconds, with .gif, move onto next question
-      // nextQuestion();
-    }
+    $('#question').empty();
+    $('.chosenAnswer').remove();
+    $('#gifs').empty();
 
 
-    $('#timer').text(":" + count);
+    showQuestion();
+    timer();
+
   }
 
 
+
+  function newGame() {
+
+    clearInterval(counter);
+    count = 31;
+    userAnswer = 0;
+    numberRight = 0;
+    numberWrong = 0;
+
+
+
+    $('#question').empty();
+    $('.chosenAnswer').remove();
+    $('#gifs').empty();
+
+
+    showQuestion();
+    timer();
+
+
+  }
+
+
+
+
+  // *** GIF PAGE FUNCTION *** //
+
+
+
+
+
+
+
+  // *** ALL TIMER CONTROLS *** //
+
+
+  //timer in function 
+  function timer() {
+    count = 30;
+
+
+    //sets timer to go down
+    counter = setInterval(showTimer, 1000);
+  }
+
+  //show the countdown of the timer
+  //if the seconds goes to zero, clear the timer and the page
+  function showTimer() {
+    count--;
+    $('#timer').text(":" + count);
+
+
+    if (count < 1) {
+      console.log('out of time if statement worked!');
+      clearInterval(counter);
+      unanswered = unanswered++;
+      showGif();
+      // run some type of reset //
+
+
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+  // *** HIDE THE END GAME RESET BUTTON UNTIL IT'S NEEDED *** //
+
+  function hideReset() {
+    $('#resetGameBTN').hide();
+  }
+
+
+
+  // *** Starts Game. Hides Button and runs showQuestion function *** //
+
+  $('#startGameBTN').on('click', function () {
+
+
+    $('#startGameBTN').hide();
+    // .show(); is how to make it reappear
+
+    showQuestion();
+    timer();
+  });
+
+
+  // *** Shows questions and answers on screen *** //
+
   function showQuestion() {
+
+
+    // clear fields here too //
+
+    $('#question').empty();
+    $('.chosenAnswer').remove();
+    $('#gifs').empty();
+
+
+    // THESE ARE FOR RANDOM //
+
+
     randomQuestion = Math.floor(Math.random() * questions.length);
     selectedSet = questions[randomQuestion];
+
+
     console.log(selectedSet);
 
     $('#question').text(selectedSet.question);
+
+
 
     for (let i = 0; i < selectedSet.options.length; i++) {
       let userPick = $('<div>');
       userPick.addClass('chosenAnswer');
       userPick.text(selectedSet.options[i]);
-      userPick.attr("valueOFGuess", i);
+      userPick.attr("data-value", (i + 1));
       $('#answers').append(userPick);
 
 
     }
 
+    $(".chosenAnswer").on('click', function () {
+      console.log('answer click ran!');
+      userAnswer = $(this).data('value');
+      console.log(userAnswer);
+      checkAnswer();
+    });
+
+    function checkAnswer() {
+
+      if (userAnswer === selectedSet.answer) {
+        console.log('correct!');
+        numberRight = numberRight + 1;
+        console.log(numberRight);
+        showGif();
+
+
+      } else if (userAnswer != selectedSet.answer) {
+        console.log('incorrect!');
+        numberWrong = numberWrong + 1;
+        console.log(numberWrong);
+        showGif();
+
+      } else {
+        console.log('unanswered');
+        unanswered = unanswered + 1;
+        console.log(unanswered);
+        showGif();
+      }
+
+    }
+
+
+
+}
+function showGif() {
+
+
+
+  if (userAnswer === selectedSet.answer) {
+    console.log('show correct Gif');
+    
+  } else if(userAnswer != selectedSet.answer && userAnswer != 0) {
+    console.log('show incorrect Gif');
+    
+  } else {
+    console.log('show unanswered Gif');
+    
   }
-  showQuestion();
-  // onlclick function
-  // needs to recognize whether use has picked right or wrong answer
-  // when correct, display happy .gif saying you got it right
-  // THEN trigger timer restart AND next question to appear
+}
 
 
-
-  // But if user picks incorrect answer
-  // show sad .gif then show correct answer for a few seconds
-  // THEN trigger timer restart AND next question to appear
-
-
-
-
+  hideReset();
 
 
 
