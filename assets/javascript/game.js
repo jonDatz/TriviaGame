@@ -148,7 +148,7 @@ $(document).ready(function () {
     $('#resetGameBTN').hide();
   }
 
-  $('#resetGameBTN').on('click', function(){
+  $('#resetGameBTN').on('click', function () {
     newGame();
   });
 
@@ -190,10 +190,10 @@ $(document).ready(function () {
 
     if (questionUsed.length === questions.length) {
 
-
-      $('#answers').append("<p> Your number correct is: " + numberRight +"</p>");
-      $('#answers').append("<p> Your number incorrect is: " + numberWrong +"</p>");
-      $('#answers').append("<p> Your number unanswered is: " + unanswered +"</p>");
+      clearInterval(counter);
+      $('#answers').append("<p> Your number correct is: " + numberRight + "</p>");
+      $('#answers').append("<p> Your number incorrect is: " + numberWrong + "</p>");
+      $('#answers').append("<p> Your number unanswered is: " + unanswered + "</p>");
       console.log('show score screen when number of questions used');
       $('#resetGameBTN').show();
 
